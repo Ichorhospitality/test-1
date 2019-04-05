@@ -57,13 +57,13 @@ public class ImageController {
 
     //NEW CHANGES
     /*
-        As the method in the ImageRepository is changed to fetch the image by using its image ID as the unique identifier,Further changes are made
-        below to the controlller below to pass the imageID to the imageServices and get the image using the imageID instead of Title.
+        As the method in the showImage is changed to fetch the image by using its image ID as the unique identifier,Further changes are made
+        below to the controlller below to pass the imageID to the imageServices and calls the method getImage() which uses the imageID instead of Title.
 
      */
     @RequestMapping("/images/{imageId}/{title}")
-    public String showImage(@PathVariable("imageId") Integer imageId, Model model) {
-        Image image = imageService.getImageByImageId(imageId);
+     public String showImage(@PathVariable("imageId") Integer imageId, @PathVariable("title") String title, Model model) {
+        Image image = imageService.getImage(imageId);
 
         //Calls the comment Service to get all the comments related to an image & return a list.
         List <Comment> comments = commentService.getCommentsByImageId(imageId);
@@ -188,7 +188,7 @@ public class ImageController {
     //Looks for a controller method with request mapping of type '/images'
     @RequestMapping(value = "/deleteImage", method = RequestMethod.DELETE)
     public String deleteImageSubmit(@RequestParam(name = "imageId") Integer imageId,Model model,HttpSession session) {
-        Image image = imageService.getImageByImageId(imageId);
+        Image image = imageService.getImage(imageId);
 
         //error Message to be printed is initialised in error.
         String error = "Only the owner of the image can delete the image";
