@@ -45,7 +45,7 @@ public class CommentController {
         newComment.setUser(user);
         newComment.setDate(new Date());
 
-        Image image =imageService.getImageByImageId(imageId);
+        Image image =imageService.getImage(imageId);
         newComment.setImages(image);
         newComment.setText(text);
         commentService.createComment(newComment);
