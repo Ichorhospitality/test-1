@@ -171,7 +171,7 @@ public class ImageController {
     //Looks for a controller method with request mapping of type '/images'
     @RequestMapping(value = "/deleteImage", method = RequestMethod.DELETE)
     public String deleteImageSubmit(@RequestParam(name = "imageId") Integer imageId,Model model,HttpSession session) {
-        Image image = imageService.getImageByImageId(imageId);
+        Image image = imageService.getImage(imageId);
 
         //error Message to be printed is initialised in error.
         String error = "Only the owner of the image can delete the image";
